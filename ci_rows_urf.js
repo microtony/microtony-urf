@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var championitems = JSON.parse(fs.readFileSync('champion_items.json'));
-var items = JSON.parse(fs.readFileSync('items_filtered.json'));
+var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
 var championdata = JSON.parse(fs.readFileSync('champions.json')).data;
 
 var sum = 0;
@@ -14,10 +14,10 @@ var avg = 15000;
 var champions = {};
 var t = [];
 var rev = {};
-var files = {};
+//var files = {};
 for (var c in championdata) {
   champions[championdata[c].id] = c;
-  files[c] = [];
+  //files[c] = [];
 }
 var allrows = [];
 
@@ -40,13 +40,10 @@ for (var ci in championitems) {
       j[rev[1039]] += scale * items[championitems[ci].items[i]].gold;
     }
   }
-  files[champions[c]].push(champions[c] + ',' + championitems[ci].winner + ',' + j.join(','));
+  //files[champions[c]].push(champions[c] + ',' + championitems[ci].winner + ',' + j.join(','));
   allrows.push(champions[c] + ',' + championitems[ci].winner + ',' + j.join(','));
 }
-for (var c in championdata) {
-  fs.writeFileSync('champions/' + c + '.csv', s + '\n' + files[c].join('\n'));
-}
-fs.open('champions/all.csv', 'w', 0666, function(err, fd){
+fs.open('rows_urf.csv', 'w', 0666, function(err, fd){
   fs.writeSync(fd, s + '\n');
   for (var i in allrows) {
     fs.writeSync(fd, allrows[i] + '\n');

@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var championitems = JSON.parse(fs.readFileSync('champion_items_normal.json'));
-var items = JSON.parse(fs.readFileSync('items_filtered.json'));
+var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
 var championdata = JSON.parse(fs.readFileSync('champions.json')).data;
 
 var sum = 0;

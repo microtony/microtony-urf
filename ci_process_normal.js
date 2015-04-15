@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var matches = fs.readdirSync('E:\\urf\\normal');
-var items = JSON.parse(fs.readFileSync('items_filtered.json'));
+var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
 
 var data = [];
 var count = 0;
@@ -31,7 +31,9 @@ for (var i in matches) {
     t.winner = match.participants[j].stats.winner;
     data.push(t);
   }
-  console.log(count + ': ' + match.matchId);
+  if (count % 100 == 0) {
+    console.log(count + ' ' + matches.length);
+  }
   count++;
 }
 

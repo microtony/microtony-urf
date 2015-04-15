@@ -25,6 +25,9 @@ for (var i in users) {
     if (match.invalid) continue;
     q.push(match.gameId);
   }
+  if (i % 100 == 0) {
+    console.log(i + ' ' + users.length + ': ' + q.length);
+  }
 }
 
 var f = function(i) {
