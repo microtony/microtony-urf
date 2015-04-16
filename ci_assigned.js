@@ -6,31 +6,37 @@ for (var c in championdata) {
   championdata[c].stats = {
     total: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     },
     ad: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     },
     ap: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     },
     fighter: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     },
     tank: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     },
     support: {
       samples: {normal: 0, urf: 0},
-      wins: {normal: 0, urf: 0}
+      wins: {normal: 0, urf: 0},
+      kills: {normal: 0, urf: 0},
     }
   }
 }
-var groupname = ['fighter', 'ad', 'ap', 'support', 'tank'];
+var groupname = ['ad', 'ap', 'fighter', 'support', 'tank'];
 
 var data = fs.readFileSync('assigned_normal.csv', {encoding: 'utf8'}).split(/\n/);
 
@@ -42,6 +48,8 @@ for (var i = 1; i < data.length; i++) {
   championdata[values[0]].stats['total'].samples.normal++;
   championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].wins.normal += (values[1] == 'True' ? 1 : 0);
   championdata[values[0]].stats['total'].wins.normal += (values[1] == 'True' ? 1 : 0);
+  championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].kills.normal += parseInt(values[2]);
+  championdata[values[0]].stats['total'].kills.normal += parseInt(values[2]);
   if (i % 1000 == 0) {
     console.log(i + ' / ' + data.length);
   }
@@ -56,6 +64,8 @@ for (var i = 1; i < data.length; i++) {
   championdata[values[0]].stats['total'].samples.urf++;
   championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].wins.urf += (values[1] == 'True' ? 1 : 0);
   championdata[values[0]].stats['total'].wins.urf += (values[1] == 'True' ? 1 : 0);
+  championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].kills.urf += parseInt(values[2]);
+  championdata[values[0]].stats['total'].kills.urf += parseInt(values[2]);
   if (i % 1000 == 0) {
     console.log(i + ' / ' + data.length);
   }

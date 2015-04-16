@@ -22,7 +22,8 @@ urfApp.config(['$routeProvider', function($routeProvider) {
     controller: 'ChampionDetailCtrl'
   }).
   when('/about', {
-    templateUrl: 'partials/about.htm'
+    templateUrl: 'partials/about.htm',
+    controller: 'AboutCtrl'
   }).
   otherwise({
     redirectTo: '/'
@@ -46,9 +47,11 @@ urfApp.factory('championService', function($http) {
       for (var i in champions) {
         champions[i].normalpick = 10 * champions[i].stats.total.samples.normal / samples.normal;
         champions[i].normalwin = champions[i].stats.total.wins.normal / champions[i].stats.total.samples.normal;
+        champions[i].normalkills = champions[i].stats.total.kills.normal / champions[i].stats.total.samples.normal;
         champions[i].urfpick = 10 * champions[i].stats.total.samples.urf / samples.urf;
         champions[i].urfwin = champions[i].stats.total.wins.urf / champions[i].stats.total.samples.urf;
-
+        champions[i].urfkills = champions[i].stats.total.kills.urf / champions[i].stats.total.samples.normal;
+        
         champions[i].primarynormal = 'ad';
         for (var j in {'ap':0, 'fighter':0, 'tank':0, 'support':0}) {
           if (champions[i].stats[j].samples.normal > champions[i].stats[champions[i].primarynormal].samples.normal) {

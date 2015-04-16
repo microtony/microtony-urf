@@ -282,3 +282,7 @@ footer {
 #champion-piechart {
   height: 280px;
 }
+.about-cluster-champion img {
+  width: 48px;
+  height: 48px;
+}

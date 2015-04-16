@@ -28,6 +28,7 @@ for (var i in matches) {
         t.totalgold += items[match.participants[j].stats['item' + k]].gold;
       }
     }
+    t.kills = match.participants[j].stats.kills;
     t.winner = match.participants[j].stats.winner;
     data.push(t);
   }

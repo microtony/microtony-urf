@@ -8,6 +8,31 @@
 
 <div class="row">
   <div class="col-lg-12" style="position: relative">
-
+    <h2>Data Set</h2>
+    <p>Data were obtained from Riot Games API from April 4 to 12, 2015. The data set consists of 80,268 normal and 92,175 URF games.</p>
+    <h2>Methodolgy</h2>
+    <p>Items pre-processing: Boots with enchantments are mapped to the corresponding unenchanted boots. Jungle items are mapped to Stalker's Blade of the same enchantment. Muramana and Seraph's Embrance are mapped to Manamune and Archangel's Staff respectively.</p>
+    <p>Match data processing: First, the items for each match are normalized to the same total gold, and are weighted by their total gold. The item builds for each champion are then aggregated.</p>
+    <p>Clustering: Using only normal games data, the champions are divided into 5 clusters using k-means algorithm on the Microsoft Azure Machine Learning platform. Caitlyn, Ziggs, Riven, Thresh and Shen were chosen as the initial centroids for better performance). The centroid of the 5 clusters Were obtained.</p>
+    <p><img src="/images/about1.png"><img src="/images/about1a.png" style="margin-left: 20px"></p>
+    <p>Build categorization: After the clustering model is trained, both normal and URF matches are individually categorized into one of the 5 clusters.</p>
+    <p><img src="/images/about2.png"></p>
+    <h2>The Clusters (Roles)</h2>
+    <p>Here are the results of the clustering algorithm</p>
+    <table class="table" style="background: rgba(0, 0, 0, 0.5)">
+      <thead>
+        <tr><th style="width: 10%">Cluster</th><th style="width: 65%">Champions</th><th style="width: 25%">Primary Items</th></tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(key, value) in roles">
+          <td ng-class="'styletext-' + key" style="font-size: 18px">{{ value }}</td>
+          <td class="about-cluster-champion">
+            <img ng-repeat="(k1, v1) in clusterChampions[key]" ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + v1 + '.png' }}">
+          </td>
+          <td class="about-cluster-champion">
+            <img ng-repeat="(k1, v1) in clusterItems[key]" ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/item/' + v1 + '.png' }}"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

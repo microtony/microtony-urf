@@ -22,6 +22,28 @@ var styletext = function(v) {
 }
 urfControllers.filter('styletext',  function() { return styletext; });
 
+urfControllers.controller('AboutCtrl', function($scope, championService) {
+  $scope.champions = [];
+  championService.load(function(c) {
+    $scope.clusterChampions = {
+      'ad' : 'Caitlyn MasterYi Sivir Tristana MissFortune Ashe Tryndamere Twitch Gangplank Corki Vayne Ezreal KogMaw Graves Varus Draven Quinn Yasuo Jinx Lucian Kalista'.split(/ /),
+      'ap' : 'Ziggs Annie Galio TwistedFate Leblanc Vladimir FiddleSticks Kayle Ryze Teemo Morgana Zilean Singed Karthus Chogath Anivia Kassadin Karma Veigar Swain Katarina Orianna Brand Rumble Cassiopeia Heimerdinger Nidalee Mordekaiser Akali Kennen Malzahar Lux Xerath Ahri Fizz Viktor Lulu Lissandra Diana Syndra Zyra Velkoz Azir'.split(/ /),
+      'fighter' : 'Riven Urgot Shaco Nocturne Renekton JarvanIV MonkeyKing LeeSin Pantheon Talon Rengar Fiora Khazix Darius Jayce Zed Aatrox RekSai'.split(/ /),
+      'support' : 'Thresh Alistar Soraka Sona Janna Taric Blitzcrank Leona Nautilus Braum Nami Bard'.split(/ /),
+      'tank' : 'Shen Olaf XinZhao Sion Warwick Nunu Jax Evelynn Amumu Rammus DrMundo Irelia Trundle Malphite Maokai Elise Skarner Nasus Udyr Poppy Gragas Yorick Garen Shyvana Volibear Sejuani Hecarim Gnar Zac Vi'.split(/ /)
+    };
+    $scope.clusterItems = {
+      'ad' : [3006, 3031, 3072, 3087, 3153],
+      'ap' : [3157, 3135, 3089, 3027, 3020],
+      'fighter': [3071, 3074, 3134, 3707, 3035],
+      'support': [2049, 3069, 3092, 3190, 3401],
+      'tank': [3709, 3083, 3065, 3068, 3143]
+    };
+    $scope.roles = stylenames;
+    $scope.champions = c.champions;
+  });
+});
+
 urfControllers.controller('ChampionListCtrl', function($scope, championService) {
   $scope.champions = [];
   championService.load(function(c) {
@@ -135,6 +157,8 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
     data.addColumn('number', 'URF');
     data.addColumn('number', 'Win Rate<br>Normal');
     data.addColumn('number', 'URF');
+    data.addColumn('number', 'Avg Kills<br>Normal');
+    data.addColumn('number', 'URF');
     data.addColumn('string', 'Primary Role<br>Normal');
     data.addColumn('string', 'URF');
     data.addRows(tabledata);
@@ -188,6 +212,8 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
         {v: $scope.champions[i].urfpick, f: changeicon($scope.champions[i].normalpick - $scope.champions[i].urfpick) + percentage($scope.champions[i].urfpick)},
         {v: $scope.champions[i].normalwin, f: percentage($scope.champions[i].normalwin)},
         {v: $scope.champions[i].urfwin, f: changeicon($scope.champions[i].normalwin - $scope.champions[i].urfwin) + percentage($scope.champions[i].urfwin)},
+        {v: $scope.champions[i].normalkills, f: percentage($scope.champions[i].normalkills)},
+        {v: $scope.champions[i].urfkills, f: changeicon($scope.champions[i].normalkills - $scope.champions[i].urfkills) + percentage($scope.champions[i].urfkills)},
         {v: $scope.champions[i].primarynormal, f: s},
         {v: $scope.champions[i].primaryurf, f: t}
       ]);

@@ -21,7 +21,7 @@ for (var c in championdata) {
 }
 var allrows = [];
 
-var s = 'Champion,Win';
+var s = 'Champion,Win,Kills';
 for (var i in items) {
   if (items[i].mapto) continue;
   rev[i] = t.length;
@@ -41,7 +41,7 @@ for (var ci in championitems) {
     }
   }
   //files[champions[c]].push(champions[c] + ',' + championitems[ci].winner + ',' + j.join(','));
-  allrows.push(champions[c] + ',' + championitems[ci].winner + ',' + j.join(','));
+  allrows.push(champions[c] + ',' + championitems[ci].winner + ',' + championitems[ci].kills + ',' + j.join(','));
 }
 fs.open('rows_normal.csv', 'w', 0666, function(err, fd){
   fs.writeSync(fd, s + '\n');
