@@ -54,7 +54,7 @@ var placeMarkers = function() {
       img.animate({
         top : Math.floor(cli.getYLocation(dataTable.getValue(parseInt(i), 1))) - 10 + "px",
         left : Math.floor(cli.getXLocation(dataTable.getValue(parseInt(i), 0))) - 10 + "px"
-      }, 3000);
+      }, 2000);
     }
     
   }
