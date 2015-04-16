@@ -135,8 +135,8 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
           ticks: [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.2, 0.3, 0.4, 0.5]
         },
         vAxis: {
-          title: 'Win Rate', minValue: 0.4, maxValue: 0.58, format:'#.##%',
-          gridlines: {count: 10}, titleTextStyle: {color: '#0CE3AC'}, textStyle: {color: '#FFF'}
+          title: 'Win Rate', minValue: 0.38, maxValue: 0.58, format:'#.##%',
+          gridlines: {count: 11}, titleTextStyle: {color: '#0CE3AC'}, textStyle: {color: '#FFF'}
         },
         legend: 'none',
         chartArea: {width: '85%', height: '80%'},
