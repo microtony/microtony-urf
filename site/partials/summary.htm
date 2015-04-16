@@ -1,0 +1,56 @@
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">URF Play Styles</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/champions">Champions</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header" id="banner">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>URF mode roles and play styles analysis</h1>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Tables
+  ================================================== -->
+  <div class="row">
+    <div class="col-lg-12" style="position: relative">
+      <div id="chart-button"><button class="btn btn-success" ng-click="summaryChartSwitch()">Displaying: {{ summaryModes[summaryChartShowing] }}</button></div>
+      <div id="chart-champion-overlay">
+        <div ng-repeat="(key, value) in champions" ng-attr-id="{{ 'chart-champion-' + value['key'] }}" class="chart-champion" ng-class="value['chartClass']" ng-style="value['chartStyles']"><img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + value['key'] + '.png' }}"></div>
+      </div>
+      <div google-chart chart="summaryChart" id="summary-chart" style="height: 500px" on-ready="summaryChartMarkers(chartWrapper)"></div>
+    </div>
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1 id="tables">Summary</h1>
+      </div>
+
+      <div google-chart chart="summaryTable" id="summary-table" on-ready="summaryTableSetClasses()"></div>
+    </div>
+  </div>
