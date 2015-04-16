@@ -1,0 +1,167 @@
+.navbar-default {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.navbar-form .form-control {
+  background-color: #222;
+  border: 1px solid #444;
+  color: #FFF;
+}
+footer {
+  color: #999;
+}
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.background .dot {
+  position: absolute;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABdJREFUeNpiYWBgmAnEDExAnAZiAAQYAArIAQY6xmzeAAAAAElFTkSuQmCC');
+  width: 100%;
+  height: 100%;
+}
+.background video {
+  min-width: 100%;
+  min-height: 100%;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  background-color: rgba(20, 20, 20, 0.7);
+}
+.table-striped > tbody > tr:nth-of-type(2n) {
+  background-color: rgba(30, 30, 30, 0.7);
+}
+#summary-table img.champion-square {
+  margin: -2px;
+  width: 32px;
+  height: 32px;
+}
+#summary-table {
+  font-size: 18px;
+  width: 100%;
+  background: none;
+  white-space: nowrap;
+}
+.percentage {
+  display: inline-block;
+  min-width: 70px;
+  text-align: right;
+}
+.stats-increase, .stats-decrease {
+  font-size: 14px;
+}
+.style-change {
+  margin: 0 6px 0 6px;
+  font-size: 14px; 
+}
+.stats-increase {
+  color: #4C4;
+}
+.stats-decrease {
+  color: #F66;
+}
+.styletext-ad {
+  color: #F44;
+}
+.styletext-ap {
+  color: #96F;
+}
+.styletext-tank {
+  color: #ABB;
+}
+.styletext-fighter {
+  color: #DC4;
+}
+.styletext-support {
+  color: #3CF;
+}
+#summary-table tbody td.summary-cell:nth-child(4),
+#summary-table tbody td.summary-cell:nth-child(6),
+#summary-table tbody td.summary-cell:nth-child(8) {
+  text-align: left;
+}
+#summary-table thead tr.summary-head th {
+  cursor: pointer;
+}
+#summary-table thead tr.summary-head th:nth-child(3),
+#summary-table thead tr.summary-head th:nth-child(5) {
+  text-align: right;
+}
+#chart-summary {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+}
+#chart-summary .chart-champion {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  overflow: hidden;
+}
+#chart-summary .chart-champion-ad {
+  border-color: #F44;
+}
+#chart-summary .chart-champion-ap {
+  border-color: #96F;
+}
+#chart-summary .chart-champion-tank {
+  border-color: #ABB; 
+}
+#chart-summary .chart-champion-fighter {
+  border-color: #DC4;
+}
+#chart-summary .chart-champion-support {
+  border-color: #3CF;
+}
+#chart-summary .chart-champion img {
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 18px;
+  height: 18px;
+}
+#chart-summary .chart-champion:hover {
+  z-index: 9999;
+  width: 20px;
+  height: 20px;
+  margin: -2px 0 0 -2px;
+  border: 0;
+  cursor: pointer;
+}
+#chart-summary .chart-champion-ad:hover {
+  box-shadow: 0 0 3px 3px #F44;
+}
+#chart-summary .chart-champion-ap:hover {
+  box-shadow: 0 0 3px 3px #96F;
+}
+#chart-summary .chart-champion-tank:hover {
+  box-shadow: 0 0 3px 3px #ABB; 
+}
+#chart-summary .chart-champion-fighter:hover {
+  box-shadow: 0 0 3px 3px #DC4;
+}
+#chart-summary .chart-champion-support:hover {
+  box-shadow: 0 0 3px 3px #3CF;
+}
+#chart-summary .chart-champion:hover img {
+  z-index: 9999;
+  top: -2px; left: -2px;
+  width: 24px;
+  height: 24px;
+}
+#chart-button {
+  position: absolute;
+  z-index: 1500;
+  right: 90px;
+  bottom: 65px;;
+}
+#chart-button button {
+  width: 150px;
+}
