@@ -22,8 +22,7 @@ urfApp.config(['$routeProvider', function($routeProvider) {
     controller: 'ChampionDetailCtrl'
   }).
   when('/about', {
-    templateUrl: 'partials/about.html',
-    controller: 'AboutCtrl'
+    templateUrl: 'partials/about.htm'
   }).
   otherwise({
     redirectTo: '/'

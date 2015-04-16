@@ -3,8 +3,8 @@ var stylenames = {
   'ad': 'Marksman',
   'ap': 'Mage',
   'fighter': 'Fighter',
-  'tank': 'Tank',
-  'support': 'Support'
+  'support': 'Support',
+  'tank': 'Tank'
 };
 var percentage = function(v) {
   return '<span class="percentage">' + (v * 100).toFixed(2) + '%</span>';
@@ -22,10 +22,6 @@ var styletext = function(v) {
 }
 urfControllers.filter('styletext',  function() { return styletext; });
 
-urfControllers.controller('NavCtrl', function() {
-
-});
-
 urfControllers.controller('ChampionListCtrl', function($scope, championService) {
   $scope.champions = [];
   championService.load(function(c) {
@@ -35,12 +31,30 @@ urfControllers.controller('ChampionListCtrl', function($scope, championService) 
 
 urfControllers.controller('ChampionDetailCtrl', function($scope, $routeParams, championService) {
   championService.load(function(c) {
+    $scope.roles = stylenames;
     for (var i in c.champions) {
       if (c.champions[i].key == $routeParams.champion) {
         $scope.champion = c.champions[i];
         break;
       }
     }
+    var data = {
+      normal : [['Role', 'Percentage']],
+      urf: [['Role', 'Percentage']]
+    }
+    for (var i in stylenames) {
+      data.normal.push([stylenames[i], 0.00001 + $scope.champion.stats[i].samples.normal / $scope.champion.stats.total.samples.normal]);
+      data.urf.push([stylenames[i], 0.00001 + $scope.champion.stats[i].samples.urf / $scope.champion.stats.total.samples.urf]);
+    }
+    
+    var options = {
+      backgroundColor: 'transparent', sliceVisibilityThreshold: 0,
+      colors: ['#F44', '#96F', '#DC4', '#3CF', '#ABB'], legend: {textStyle: {color: '#FFF'}},
+      chartArea: {width: '85%', height: '80%'},
+    };
+    var chartDiff = new google.visualization.PieChart(document.getElementById('champion-piechart'));
+    var diffData = chartDiff.computeDiff(google.visualization.arrayToDataTable(data.normal), google.visualization.arrayToDataTable(data.urf));
+    chartDiff.draw(diffData, options);
   });
 });
 
@@ -102,7 +116,7 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
           gridlines: {count: 10}, titleTextStyle: {color: '#0CE3AC'}, textStyle: {color: '#FFF'}
         },
         legend: 'none',
-        chartArea: {width: '90%', height: '80%'},
+        chartArea: {width: '85%', height: '80%'},
         backgroundColor: 'transparent',
         tooltip : {trigger: 'none'},
         dataOpacity: 0

@@ -48,7 +48,7 @@ footer {
   width: 32px;
   height: 32px;
 }
-#summary-table {
+#summary-table, .champion-rolestats-table {
   font-size: 18px;
   width: 100%;
   background: none;
@@ -275,4 +275,10 @@ footer {
 .champion-stats-value {
   font-size: 24px;
   font-weight: bold;
+}
+.champion-rolestats {
+  margin-top: 30px;
+}
+#champion-piechart {
+  height: 280px;
 }

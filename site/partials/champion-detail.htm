@@ -4,7 +4,7 @@
       <h1>{{ champion.name }}</h1>
       <div ng-style="{ 'background-image': 'url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + champion.key + '_0.jpg)' }" class="champion-stats-wrapper">
         <div class="champion-stats" style="top: 110px">
-          <h2>Pick Rate</h2>
+          <h2>Overall Pick Rate</h2>
           <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalpick | percentage }}</div></div>
           <div>
             <div class="champion-stats-type">&nbsp;</div>
@@ -15,7 +15,7 @@
           <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfpick | percentage }}</div></div>
         </div>
         <div class="champion-stats" style="top: 220px">
-          <h2>Win Rate</h2>
+          <h2>Overall Win Rate</h2>
           <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalwin | percentage }}</div></div>
           <div>
             <div class="champion-stats-type">&nbsp;</div>
@@ -24,6 +24,41 @@
             </div>
           </div>
           <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfwin | percentage }}</div></div>
+        </div>
+      </div>
+      <div class="champion-rolestats">
+        <div class="row">
+          <div class="col-lg-4">
+            <div style="position: relative">
+              <div style="position: absolute; top: 150px; left: 100px">Normal</div>
+              <div style="position: absolute; top: 50px; left: 30px; color: #FFF">URF</div>
+            </div>
+            <div id="champion-piechart" style="background: rgba(0, 0, 0, 0.5);"></div>
+          </div>
+          <div class="col-lg-8">
+            <table class="table table-striped champion-rolestats-table">
+              <thead>
+                <tr><th>Role</th><th>Adoption<br>Normal &gt; URF</th><th>Win Rate<br>Normal &gt; URF</th></tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(key, value) in roles">
+                  <td ng-class="'styletext-' + key">{{ value }}</td>
+                  <td>
+                    <span class="percentage">{{ champion.stats[key].samples.normal / champion.stats.total.samples.normal | percentage }}</span>
+                    <span style="margin-left: 5px" ng-class="['glyphicon', 'glyphicon-triangle-' + (champion.stats[key].samples.normal * champion.stats.total.samples.urf < champion.stats[key].samples.urf * champion.stats.total.samples.normal ? 'top' : 'bottom'), 'stats-' + (champion.stats[key].samples.normal * champion.stats.total.samples.urf < champion.stats[key].samples.urf * champion.stats.total.samples.normal ? 'increase' : 'decrease')]" aria-hidden="true"></span>
+                    <span class="percentage">{{ champion.stats[key].samples.urf / champion.stats.total.samples.urf | percentage }}</span>
+                  </td>
+                  <td>
+                    <span class="percentage" ng-show="champion.stats[key].samples.normal">{{ champion.stats[key].wins.normal / champion.stats[key].samples.normal | percentage }}</span>
+                    <span class="percentage" ng-show="champion.stats[key].samples.normal == 0">--</span>
+                    <span style="margin-left: 5px;" ng-class="['glyphicon', 'glyphicon-triangle-' + (champion.stats[key].wins.normal * champion.stats[key].samples.urf < champion.stats[key].wins.urf * champion.stats[key].samples.normal ? 'top' : 'bottom'), 'stats-' + (champion.stats[key].wins.normal * champion.stats[key].samples.urf < champion.stats[key].wins.urf * champion.stats[key].samples.normal ? 'increase' : 'decrease')]" aria-hidden="true"></span>
+                    <span class="percentage" ng-show="champion.stats[key].samples.urf">{{ champion.stats[key].wins.urf / champion.stats[key].samples.urf | percentage }}</span>
+                    <span class="percentage" ng-show="champion.stats[key].samples.urf == 0">--</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
