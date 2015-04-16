@@ -1,5 +1,5 @@
 .navbar-default {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   margin-top: 30px;
   border-radius: 10px;
   padding: 0 10px;
@@ -93,11 +93,11 @@ footer {
 #summary-table thead tr.summary-head th:nth-child(5) {
   text-align: right;
 }
-#chart-summary {
+#summary-chart {
   position: relative;
   background: rgba(0, 0, 0, 0.5);
 }
-#chart-summary .chart-champion {
+#chart-champion-overlay .chart-champion {
   position: absolute;
   width: 16px;
   height: 16px;
@@ -105,29 +105,37 @@ footer {
   border-width: 1px;
   border-style: solid;
   overflow: hidden;
+  -webkit-transition: 2s ease-in-out all;
+  -moz-transition: 2s ease-in-out all;
+  -o-transition: 2s ease-in-out all;
+  transition: 2s ease-in-out all;
+  -webkit-transition-property: top, left;
+  -moz-transition-property: top, left
+  -o-transition-property: top, left
+  transition-property: top, left
 }
-#chart-summary .chart-champion-ad {
+#chart-champion-overlay .chart-champion-ad {
   border-color: #F44;
 }
-#chart-summary .chart-champion-ap {
+#chart-champion-overlay .chart-champion-ap {
   border-color: #96F;
 }
-#chart-summary .chart-champion-tank {
+#chart-champion-overlay .chart-champion-tank {
   border-color: #ABB; 
 }
-#chart-summary .chart-champion-fighter {
+#chart-champion-overlay .chart-champion-fighter {
   border-color: #DC4;
 }
-#chart-summary .chart-champion-support {
+#chart-champion-overlay .chart-champion-support {
   border-color: #3CF;
 }
-#chart-summary .chart-champion img {
+#chart-champion-overlay .chart-champion img {
   position: absolute;
   top: -2px; left: -2px;
   width: 18px;
   height: 18px;
 }
-#chart-summary .chart-champion:hover {
+#chart-champion-overlay .chart-champion:hover {
   z-index: 9999;
   width: 20px;
   height: 20px;
@@ -135,22 +143,22 @@ footer {
   border: 0;
   cursor: pointer;
 }
-#chart-summary .chart-champion-ad:hover {
+#chart-champion-overlay .chart-champion-ad:hover {
   box-shadow: 0 0 3px 3px #F44;
 }
-#chart-summary .chart-champion-ap:hover {
+#chart-champion-overlay .chart-champion-ap:hover {
   box-shadow: 0 0 3px 3px #96F;
 }
-#chart-summary .chart-champion-tank:hover {
+#chart-champion-overlay .chart-champion-tank:hover {
   box-shadow: 0 0 3px 3px #ABB; 
 }
-#chart-summary .chart-champion-fighter:hover {
+#chart-champion-overlay .chart-champion-fighter:hover {
   box-shadow: 0 0 3px 3px #DC4;
 }
-#chart-summary .chart-champion-support:hover {
+#chart-champion-overlay .chart-champion-support:hover {
   box-shadow: 0 0 3px 3px #3CF;
 }
-#chart-summary .chart-champion:hover img {
+#chart-champion-overlay .chart-champion:hover img {
   z-index: 9999;
   top: -2px; left: -2px;
   width: 24px;
@@ -163,5 +171,9 @@ footer {
   bottom: 65px;;
 }
 #chart-button button {
-  width: 150px;
+  width: 160px;
+}
+#chart-champion-overlay {
+  position: absolute;
+  z-index: 9998;
 }
