@@ -1,0 +1,37 @@
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>{{ champion.name }}</h1>
+      <div ng-style="{ 'background-image': 'url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + champion.key + '_0.jpg)' }" class="champion-stats-wrapper">
+        <div class="champion-stats" style="top: 110px">
+          <h2>Pick Rate</h2>
+          <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalpick | percentage }}</div></div>
+          <div>
+            <div class="champion-stats-type">&nbsp;</div>
+            <div>
+              <span class="glyphicon stats-large" ng-class="champion.normalpick < champion.urfpick ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfpick | percentage }}</div></div>
+        </div>
+        <div class="champion-stats" style="top: 220px">
+          <h2>Win Rate</h2>
+          <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalwin | percentage }}</div></div>
+          <div>
+            <div class="champion-stats-type">&nbsp;</div>
+            <div>
+              <span class="glyphicon stats-large" ng-class="champion.normalwin < champion.urfwin ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfwin | percentage }}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12" style="position: relative">
+    
+  </div>
+</div>

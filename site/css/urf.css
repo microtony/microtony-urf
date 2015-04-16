@@ -1,3 +1,9 @@
+html {
+   overflow-y: scroll;
+}
+footer {
+  margin: 20px;
+}
 .navbar-default {
   background-color: rgba(0, 0, 0, 0.5);
   margin-top: 30px;
@@ -56,6 +62,10 @@ footer {
 .stats-increase, .stats-decrease {
   font-size: 14px;
 }
+.stats-large.stats-increase, .stats-large.stats-decrease {
+  margin: 8px 10px 0px;
+  font-size: 18px;
+}
 .style-change {
   margin: 0 6px 0 6px;
   font-size: 14px; 
@@ -92,6 +102,9 @@ footer {
 #summary-table thead tr.summary-head th:nth-child(3),
 #summary-table thead tr.summary-head th:nth-child(5) {
   text-align: right;
+}
+#summary-table a {
+  color: #FFF;
 }
 #summary-chart {
   position: relative;
@@ -176,4 +189,90 @@ footer {
 #chart-champion-overlay {
   position: absolute;
   z-index: 9998;
+}
+.list-champion {
+  display: inline-block;
+  position: relative;
+  margin: 10px 11px;
+}
+.list-champion a {
+  color: #FFF;
+}
+.list-champion img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 4px;
+  display: block;
+}
+.list-champion-name {
+  text-align: center;
+}
+.list-normal-ad:before, .list-normal-ap:before, .list-normal-tank:before, .list-normal-fighter:before, .list-normal-support:before,
+.list-urf-ad:after, .list-urf-ap:after, .list-urf-tank:after, .list-urf-fighter:after, .list-urf-support:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+}
+.list-normal-ad:before {
+  box-shadow: inset 4px 4px 8px 0px #F44;
+}
+.list-normal-ap:before {
+  box-shadow: inset 4px 4px 8px 0px #96F;
+}
+.list-normal-tank:before {
+  box-shadow: inset 4px 4px 8px 0px #ABB;
+}
+.list-normal-fighter:before {
+  box-shadow: inset 4px 4px 8px 0px #DC4;
+}
+.list-normal-support:before {
+  box-shadow: inset 4px 4px 8px 0px #3CF;
+}
+.list-urf-ad:after {
+  box-shadow: inset -4px -4px 8px 0px #F44;
+}
+.list-urf-ap:after {
+  box-shadow: inset -4px -4px 8px 0px #96F;
+}
+.list-urf-tank:after {
+  box-shadow: inset -4px -4px 8px 0px #ABB;
+}
+.list-urf-fighter:after {
+  box-shadow: inset -4px -4px 8px 0px #DC4;
+}
+.list-urf-support:after {
+  box-shadow: inset -4px -4px 8px 0px #3CF;
+}
+.champion-stats-wrapper {
+  margin-top: 32px;
+  padding: 0px 32px;
+  height: 500px;
+  background-size: cover;
+  background-position: right center;
+  position: relative;
+}
+.champion-stats {
+  position: absolute;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+}
+.champion-stats h2 {
+  font-size: 18px;
+  margin-top: 5px;
+}
+.champion-stats > div {
+  float: left;
+}
+.champion-stats-type {
+  font-size: 10px;
+  color: #888;
+}
+.champion-stats-value {
+  font-size: 24px;
+  font-weight: bold;
 }

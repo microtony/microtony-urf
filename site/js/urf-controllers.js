@@ -1,4 +1,48 @@
 var urfControllers = angular.module('urfControllers', ['googlechart']);
+var stylenames = {
+  'ad': 'Marksman',
+  'ap': 'Mage',
+  'fighter': 'Fighter',
+  'tank': 'Tank',
+  'support': 'Support'
+};
+var percentage = function(v) {
+  return '<span class="percentage">' + (v * 100).toFixed(2) + '%</span>';
+};
+urfControllers.filter('percentage', function() { return function(v) { return (v * 100).toFixed(2) + '%';} });
+var changeicon = function(v) {
+  if (v < 0) {
+    return '<span class="glyphicon glyphicon-triangle-top stats-increase" aria-hidden="true"></span>';
+  }
+  return '<span class="glyphicon glyphicon-triangle-bottom stats-decrease" aria-hidden="true"></span>';
+};
+urfControllers.filter('changeicon', function() { return changeicon; });
+var styletext = function(v) {
+  return '<span class="styletext-' + v + '">' + stylenames[v] + '</span>';
+}
+urfControllers.filter('styletext',  function() { return styletext; });
+
+urfControllers.controller('NavCtrl', function() {
+
+});
+
+urfControllers.controller('ChampionListCtrl', function($scope, championService) {
+  $scope.champions = [];
+  championService.load(function(c) {
+    $scope.champions = c.champions;
+  });
+});
+
+urfControllers.controller('ChampionDetailCtrl', function($scope, $routeParams, championService) {
+  championService.load(function(c) {
+    for (var i in c.champions) {
+      if (c.champions[i].key == $routeParams.champion) {
+        $scope.champion = c.champions[i];
+        break;
+      }
+    }
+  });
+});
 
 urfControllers.controller('SummaryCtrl', function ($scope, $http, championService) {
   var chartdatanormal = [];
@@ -9,13 +53,7 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
     normal: 0,
     urf: 0
   };
-  var stylenames = {
-    'ad': 'Marksman',
-    'ap': 'Mage',
-    'fighter': 'Fighter',
-    'tank': 'Tank',
-    'support': 'Support'
-  };
+
   $scope.summaryChartShowing = 'urf';
   $scope.summaryModes = {
     'urf' : 'URF', 'normal' : 'Normal'
@@ -108,68 +146,34 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
   $scope.summaryTableSetClasses = function() {
     angular.element(document.querySelector('#summary-table table')).addClass('table').addClass('table-striped').removeClass('google-visualization-table-table');
   }
-  var percentage = function(v) {
-    return '<span class="percentage">' + (v * 100).toFixed(2) + '%</span>';
-  }
-  var changeicon = function(v) {
-    if (v < 0) {
-      return '<span class="glyphicon glyphicon-triangle-top stats-increase" aria-hidden="true"></span>';
-    }
-    return '<span class="glyphicon glyphicon-triangle-bottom stats-decrease" aria-hidden="true"></span>';
-  }
-  var styletext = function(v) {
-    return '<span class="styletext-' + v + '">' + stylenames[v] + '</span>';
-  }
 
   $scope.champions = [];
   championService.load(function(c) {
-    /*for (var i in c) {
-      samples.normal += c[i].stats.total.samples.normal;
-      samples.urf += c[i].stats.total.samples.urf;
-      $scope.champions.push(c[i]);
-    }
-    $scope.champions.sort(function(a, b) {
-      if (a.name < b.name) return -1;
-      return a.name == b.name ? 0 : 1;
-    });*/
 
     $scope.champions = c.champions;
     samples = c.samples;
 
+    for (var i in $scope.champions) {
+      $scope.champions[i].chartClass = 'chart-champion-' + $scope.champions[i]['primary' + $scope.summaryChartShowing];
+      $scope.champions[i].chartStyles = {}
+    }
     var rows = [];
 
     for (var i in $scope.champions) {
-      var normalpick = 10 * $scope.champions[i].stats.total.samples.normal / samples.normal;
-      var normalwin = $scope.champions[i].stats.total.wins.normal / $scope.champions[i].stats.total.samples.normal;
-      var urfpick = 10 * $scope.champions[i].stats.total.samples.urf / samples.urf;
-      var urfwin = $scope.champions[i].stats.total.wins.urf / $scope.champions[i].stats.total.samples.urf;
-
-      $scope.champions[i].primarynormal = 'ad';
-      for (var j in {'ap':0, 'fighter':0, 'tank':0, 'support':0}) {
-        if ($scope.champions[i].stats[j].samples.normal > $scope.champions[i].stats[$scope.champions[i].primarynormal].samples.normal) {
-          $scope.champions[i].primarynormal = j;
-        }
-      }
-      $scope.champions[i].primaryurf = 'ad';
-      for (var j in {'ap':0, 'fighter':0, 'tank':0, 'support':0}) {
-        if ($scope.champions[i].stats[j].samples.urf > $scope.champions[i].stats[$scope.champions[i].primaryurf].samples.urf) {
-          $scope.champions[i].primaryurf = j;
-        }
-      }
       var s = styletext($scope.champions[i].primarynormal);
       var t = '';
       if ($scope.champions[i].primaryurf != $scope.champions[i].primarynormal) {
         t = '<span class="glyphicon glyphicon-triangle-right style-change" aria-hidden="true"></span>' + styletext($scope.champions[i].primaryurf);
       }
-      chartdatanormal.push([normalpick, normalwin, $scope.champions[i].name]);
-      chartdataurf.push([urfpick, urfwin, $scope.champions[i].name]);
+      chartdatanormal.push([$scope.champions[i].normalpick, $scope.champions[i].normalwin, $scope.champions[i].name]);
+      chartdataurf.push([$scope.champions[i].urfpick, $scope.champions[i].urfwin, $scope.champions[i].name]);
       tabledata.push([
-        $scope.champions[i].name,
+        {v: $scope.champions[i].name, f: '<a href="#champion/' + $scope.champions[i].key + '">' + $scope.champions[i].name + '</a>'},
         '<img src="http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + $scope.champions[i]['key'] + '.png" class="champion-square">',
-        {v: normalpick, f: percentage(normalpick)},
-        {v: urfpick, f: changeicon(normalpick - urfpick) + percentage(urfpick)},
-        {v: normalwin, f: percentage(normalwin)},
-        {v: urfwin, f: changeicon(normalwin - urfwin) + percentage(urfwin)},
+        {v: $scope.champions[i].normalpick, f: percentage($scope.champions[i].normalpick)},
+        {v: $scope.champions[i].urfpick, f: changeicon($scope.champions[i].normalpick - $scope.champions[i].urfpick) + percentage($scope.champions[i].urfpick)},
+        {v: $scope.champions[i].normalwin, f: percentage($scope.champions[i].normalwin)},
+        {v: $scope.champions[i].urfwin, f: changeicon($scope.champions[i].normalwin - $scope.champions[i].urfwin) + percentage($scope.champions[i].urfwin)},
         {v: $scope.champions[i].primarynormal, f: s},
         {v: $scope.champions[i].primaryurf, f: t}
       ]);

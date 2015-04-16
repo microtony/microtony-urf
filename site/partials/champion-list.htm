@@ -1,0 +1,18 @@
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Champions</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12" style="position: relative">
+    <div ng-repeat="(key, value) in champions" ng-attr-id="{{ 'list-champion-' + value['key'] }}" class="list-champion">
+      <a ng-href="#champion/{{ value['key'] }}" ng-class="['list-normal-' + value['primarynormal'], 'list-urf-' + value['primaryurf']]">
+        <img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + value['key'] + '.png' }}">
+        <div class="list-champion-name">{{ value['name'] }}</div>
+      </div>
+    </div>
+  </div>
+</div>
