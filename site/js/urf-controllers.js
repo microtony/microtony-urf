@@ -1,6 +1,6 @@
 var urfControllers = angular.module('urfControllers', ['googlechart']);
 
-urfControllers.controller('SummaryCtrl', function ($scope, $http) {
+urfControllers.controller('SummaryCtrl', function ($scope, $http, championService) {
   var chartdatanormal = [];
   var chartdataurf = [];
   var tabledata = [];
@@ -122,8 +122,8 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http) {
   }
 
   $scope.champions = [];
-  $http.get('champion_stats.json').success(function(c) {
-    for (var i in c) {
+  championService.load(function(c) {
+    /*for (var i in c) {
       samples.normal += c[i].stats.total.samples.normal;
       samples.urf += c[i].stats.total.samples.urf;
       $scope.champions.push(c[i]);
@@ -131,7 +131,11 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http) {
     $scope.champions.sort(function(a, b) {
       if (a.name < b.name) return -1;
       return a.name == b.name ? 0 : 1;
-    });
+    });*/
+
+    $scope.champions = c.champions;
+    samples = c.samples;
+
     var rows = [];
 
     for (var i in $scope.champions) {
