@@ -9,10 +9,18 @@
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./css/urf.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="js/ng-google-chart.js"></script>
+    <script src="js/urf-controllers.js"></script>
+    <script src="js/urf-angular.js"></script>
   </head>
   <body>
-    <div class="background"><div class="dot"></div> <video src="bgvideo.mp4" autoplay loop controls="false"></video></div>
+    <div class="background"><div class="dot"></div> <video src="bgvideo.mp4" autoplay loop></video></div>
     <div class="container">
+
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -22,51 +30,20 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">URF Play Styles</a>
+            <a class="navbar-brand" href="#/">URF Play Styles</a>
           </div>
 
           <div class="collapse navbar-collapse" id="navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="/champions">Champions</a></li>
+              <li><a href="#champions">Champions</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-              </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">About</a></li>
+            <ul class="nav navbar-nav">
+              <li><a href="#about">About</a></li>
             </ul>
           </div>
         </div>
       </nav>
-
-      <div class="page-header" id="banner">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1>URF mode roles and play styles analysis</h1>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Tables
-      ================================================== -->
-      <div class="row">
-        <div class="col-lg-12" style="position: relative">
-          <div id="chart-button"><button class="btn btn-success">Displaying: URF</button></div>
-          <div id="chart-summary" style="height: 500px"></div>
-        </div>
-        <div class="col-lg-12">
-          <div class="page-header">
-            <h1 id="tables">Summary</h1>
-          </div>
-
-          <div id="summary-table">
-          </div>
-        </div>
-      </div>
-
+      <div ng-view></div>
       <footer>
         <div class="row">
           <div class="col-lg-12">
@@ -75,11 +52,5 @@
         </div>
       </footer>
     </div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script src="js/urf.js"></script>
-
   </body>
 </html>
