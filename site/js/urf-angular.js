@@ -50,7 +50,7 @@ urfApp.factory('championService', function($http) {
         champions[i].normalkills = champions[i].stats.total.kills.normal / champions[i].stats.total.samples.normal;
         champions[i].urfpick = 10 * champions[i].stats.total.samples.urf / samples.urf;
         champions[i].urfwin = champions[i].stats.total.wins.urf / champions[i].stats.total.samples.urf;
-        champions[i].urfkills = champions[i].stats.total.kills.urf / champions[i].stats.total.samples.normal;
+        champions[i].urfkills = champions[i].stats.total.kills.urf / champions[i].stats.total.samples.urf;
         
         champions[i].primarynormal = 'ad';
         for (var j in {'ap':0, 'fighter':0, 'tank':0, 'support':0}) {

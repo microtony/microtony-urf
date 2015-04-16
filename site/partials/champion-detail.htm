@@ -3,7 +3,7 @@
     <div class="col-lg-12">
       <h1>{{ champion.name }}</h1>
       <div ng-style="{ 'background-image': 'url(http://ddragon.leagueoflegends.com/cdn/img/champion/splash/' + champion.key + '_0.jpg)' }" class="champion-stats-wrapper">
-        <div class="champion-stats" style="top: 110px">
+        <div class="champion-stats" style="top: 160px">
           <h2>Overall Pick Rate</h2>
           <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalpick | percentage }}</div></div>
           <div>
@@ -14,7 +14,7 @@
           </div>
           <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfpick | percentage }}</div></div>
         </div>
-        <div class="champion-stats" style="top: 220px">
+        <div class="champion-stats" style="top: 270px">
           <h2>Overall Win Rate</h2>
           <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalwin | percentage }}</div></div>
           <div>
@@ -24,6 +24,17 @@
             </div>
           </div>
           <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfwin | percentage }}</div></div>
+        </div>
+        <div class="champion-stats" style="top: 380px">
+          <h2>Overall Average Kills</h2>
+          <div><div class="champion-stats-type">NORMAL</div><div class="champion-stats-value">{{ champion.normalkills | twodp }}</div></div>
+          <div>
+            <div class="champion-stats-type">&nbsp;</div>
+            <div>
+              <span class="glyphicon stats-large" ng-class="champion.normalkills < champion.urfkills ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div><div class="champion-stats-type">URF</div><div class="champion-stats-value">{{ champion.urfkills | twodp }}</div></div>
         </div>
       </div>
       <div class="champion-rolestats">
@@ -38,7 +49,7 @@
           <div class="col-lg-8">
             <table class="table table-striped champion-rolestats-table">
               <thead>
-                <tr><th>Role</th><th>Adoption<br>Normal &gt; URF</th><th>Win Rate<br>Normal &gt; URF</th></tr>
+                <tr><th>Role</th><th>Adoption<br>Normal &gt; URF</th><th>Win Rate<br>Normal &gt; URF</th><th>Average Kills<br>Normal &gt; URF</th></tr>
               </thead>
               <tbody>
                 <tr ng-repeat="(key, value) in roles">
@@ -54,6 +65,13 @@
                     <span style="margin-left: 5px;" ng-class="['glyphicon', 'glyphicon-triangle-' + (champion.stats[key].wins.normal * champion.stats[key].samples.urf < champion.stats[key].wins.urf * champion.stats[key].samples.normal ? 'top' : 'bottom'), 'stats-' + (champion.stats[key].wins.normal * champion.stats[key].samples.urf < champion.stats[key].wins.urf * champion.stats[key].samples.normal ? 'increase' : 'decrease')]" aria-hidden="true"></span>
                     <span class="percentage" ng-show="champion.stats[key].samples.urf">{{ champion.stats[key].wins.urf / champion.stats[key].samples.urf | percentage }}</span>
                     <span class="percentage" ng-show="champion.stats[key].samples.urf == 0">--</span>
+                  </td>
+                  <td>
+                    <span class="avgkills" ng-show="champion.stats[key].samples.normal">{{ champion.stats[key].kills.normal / champion.stats[key].samples.normal | twodp }}</span>
+                    <span class="avgkills" ng-show="champion.stats[key].samples.normal == 0">--</span>
+                    <span style="margin-left: 5px;" ng-class="['glyphicon', 'glyphicon-triangle-' + (champion.stats[key].kills.normal * champion.stats[key].samples.urf < champion.stats[key].kills.urf * champion.stats[key].samples.normal ? 'top' : 'bottom'), 'stats-' + (champion.stats[key].kills.normal * champion.stats[key].samples.urf < champion.stats[key].kills.urf * champion.stats[key].samples.normal ? 'increase' : 'decrease')]" aria-hidden="true"></span>
+                    <span class="avgkills" ng-show="champion.stats[key].samples.urf">{{ champion.stats[key].kills.urf / champion.stats[key].samples.urf | twodp }}</span>
+                    <span class="avgkills" ng-show="champion.stats[key].samples.urf == 0">--</span>
                   </td>
                 </tr>
               </tbody>

@@ -59,6 +59,11 @@ footer {
   min-width: 70px;
   text-align: right;
 }
+.avgkills {
+  display: inline-block;
+  min-width: 50px;
+  text-align: right;
+}
 .stats-increase, .stats-decrease {
   font-size: 14px;
 }
@@ -123,9 +128,9 @@ footer {
   -o-transition: 2s ease-in-out all;
   transition: 2s ease-in-out all;
   -webkit-transition-property: top, left;
-  -moz-transition-property: top, left
-  -o-transition-property: top, left
-  transition-property: top, left
+  -moz-transition-property: top, left;
+  -o-transition-property: top, left;
+  transition-property: top, left;
 }
 #chart-champion-overlay .chart-champion-ad {
   border-color: #F44;

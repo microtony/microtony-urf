@@ -10,6 +10,7 @@ var percentage = function(v) {
   return '<span class="percentage">' + (v * 100).toFixed(2) + '%</span>';
 };
 urfControllers.filter('percentage', function() { return function(v) { return (v * 100).toFixed(2) + '%';} });
+urfControllers.filter('twodp', function() { return function(v) { return v.toFixed(2); } });
 var changeicon = function(v) {
   if (v < 0) {
     return '<span class="glyphicon glyphicon-triangle-top stats-increase" aria-hidden="true"></span>';
@@ -212,8 +213,8 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
         {v: $scope.champions[i].urfpick, f: changeicon($scope.champions[i].normalpick - $scope.champions[i].urfpick) + percentage($scope.champions[i].urfpick)},
         {v: $scope.champions[i].normalwin, f: percentage($scope.champions[i].normalwin)},
         {v: $scope.champions[i].urfwin, f: changeicon($scope.champions[i].normalwin - $scope.champions[i].urfwin) + percentage($scope.champions[i].urfwin)},
-        {v: $scope.champions[i].normalkills, f: percentage($scope.champions[i].normalkills)},
-        {v: $scope.champions[i].urfkills, f: changeicon($scope.champions[i].normalkills - $scope.champions[i].urfkills) + percentage($scope.champions[i].urfkills)},
+        {v: $scope.champions[i].normalkills, f: '<span class="avgkills">' + $scope.champions[i].normalkills.toFixed(2) + '</span>'},
+        {v: $scope.champions[i].urfkills, f: changeicon($scope.champions[i].normalkills - $scope.champions[i].urfkills) + '<span class="avgkills">' + $scope.champions[i].urfkills.toFixed(2) + '<span>'},
         {v: $scope.champions[i].primarynormal, f: s},
         {v: $scope.champions[i].primaryurf, f: t}
       ]);
