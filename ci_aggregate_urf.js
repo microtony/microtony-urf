@@ -1,7 +1,7 @@
 var fs = require('fs');
 
-var championitems = JSON.parse(fs.readFileSync('champion_items.json'));
-var items = JSON.parse(fs.readFileSync('items_filtered.json'));
+var championitems = JSON.parse(fs.readFileSync('champion_items_urf.json'));
+var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
 var championdata = JSON.parse(fs.readFileSync('champions.json')).data;
 
 var sum = 0;
@@ -19,6 +19,7 @@ for (var c in championdata) {
   t.count = 0;
   t.name = c;
   t.itemcounts = {};
+  t.totalgold = 0;
   for (var i in items) {
     if (items[i].mapto) continue;
     t.itemcounts[i] = 0;
@@ -31,6 +32,7 @@ for (var ci in championitems) {
   var c = championitems[ci].champion;
   //console.log(champions[c]);
   champions[c].count++;
+  champions[c].totalgold += championitems[ci].totalgold;
   for (var i in championitems[ci].items) {
     var it = championitems[ci].items[i];
     champions[c].itemcounts[it] += scale;
@@ -40,9 +42,9 @@ for (var ci in championitems) {
   }
 }
 
-fs.writeFileSync('champions_aggregated.json', JSON.stringify(champions));
+fs.writeFileSync('champions_aggregated_urf.json', JSON.stringify(champions));
 
-var s = 'Champion,Count';
+var s = 'Champion,Count,AvgGold';
 var itemnames = '';
 for (var i in items) {
   if (items[i].mapto) continue;
@@ -51,12 +53,12 @@ for (var i in items) {
 }
 s += '\n';
 for (var c in champions) {
-  s += champions[c].name + ',' + champions[c].count
+  s += champions[c].name + ',' + champions[c].count + ',' + champions[c].totalgold / champions[c].count;
   for (var i in items) {
     if (items[i].mapto) continue;
     s += ',' + champions[c].itemcounts[i] / champions[c].count * items[i].gold;
   }
   s += '\n';
 }
-fs.writeFileSync('champions_aggregated.csv', s);
+fs.writeFileSync('champions_aggregated_urf.csv', s);
 fs.writeFileSync('itemnames.txt', itemnames);

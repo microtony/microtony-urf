@@ -166,12 +166,12 @@
   "3040": {
     "name": "Seraph's Embrace",
     "gold": 2700,
-    "mapTo": 3003
+    "mapto": 3003
   },
   "3042": {
     "name": "Muramana",
     "gold": 2200,
-    "mapTo": 3004
+    "mapto": 3004
   },
   "3044": {
     "name": "Phage",

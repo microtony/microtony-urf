@@ -78,13 +78,26 @@
             </table>
           </div>
         </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Popular Items</h2>
+          </div>
+          <div class="col-lg-6">
+            <div style="letter-spacing: 12px">NORMAL</div>
+            <div ng-repeat="(key, value) in champion.items.normal" class="list-item">
+              <img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/item/' + value['id'] + '.png' }}">
+              <div class="list-item-count">{{ value['count'] | percentage }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div style="letter-spacing: 12px">URF</div>
+            <div ng-repeat="(key, value) in champion.items.urf" class="list-item">
+              <img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/item/' + value['id'] + '.png' }}">
+              <div class="list-item-count">{{ value['count'] | percentage }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12" style="position: relative">
-    
   </div>
 </div>

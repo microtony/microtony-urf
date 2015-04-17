@@ -291,3 +291,19 @@ footer {
   width: 48px;
   height: 48px;
 }
+
+.list-item {
+  display: inline-block;
+  position: relative;
+  margin: 5px 4px;
+}
+.list-item img {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 4px;
+  display: block;
+}
+.list-item-count {
+  font-size: 13px;
+  text-align: center;
+}

@@ -2,6 +2,7 @@ var fs = require('fs');
 var readline = require('readline');
  
 var championdata = JSON.parse(fs.readFileSync('champions.json')).data;
+var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
 
 for (var c in championdata) {
   championdata[c].stats = {
@@ -78,6 +79,43 @@ rd.on('line', function(line) {
     console.log(i);
   }
 }).on('close', function(){
-  fs.writeFileSync('champion_stats.json', JSON.stringify(championdata));
+  itemstats();
 });
 
+var itemstats = function() {
+  var lines = fs.readFileSync('champions_aggregated_normal.csv', {encoding: 'utf8'}).split(/\n/);
+  var header = lines[0].trim().split(/,/);
+  for (var j = 1; j < lines.length; j++) {
+    var values = lines[j].trim().split(/,/);
+    if (values.length < 10) continue ;
+    var a = [];
+    var scale = parseFloat(values[2]) / 15000;
+    for (i = 3; i < values.length; i++) {
+      a.push({count: parseFloat(values[i]) / items[header[i]].gold * scale, id: header[i]});
+    }
+    a.sort(function(a, b) {
+      if (a.count > b.count) return -1;
+      return a.count == b.count ? 0 : 1;
+    });
+    championdata[values[0]].items = {};
+    championdata[values[0]].items.normal = a.slice(0, 10);
+  }
+  
+  lines = fs.readFileSync('champions_aggregated_urf.csv', {encoding: 'utf8'}).split(/\n/);
+  for (var j = 1; j < lines.length; j++) {
+    var values = lines[j].trim().split(/,/);
+    if (values.length < 10) continue ;
+    var a = [];
+    var scale = parseFloat(values[2]) / 15000;
+    for (i = 3; i < values.length; i++) {
+      a.push({count: parseFloat(values[i]) / items[header[i]].gold * scale, id: header[i]});
+    }
+    a.sort(function(a, b) {
+      if (a.count > b.count) return -1;
+      return a.count == b.count ? 0 : 1;
+    });
+    championdata[values[0]].items.urf = a.slice(0, 10);
+  }
+
+  fs.writeFileSync('champion_stats.json', JSON.stringify(championdata));
+};
