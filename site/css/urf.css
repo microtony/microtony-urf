@@ -126,6 +126,9 @@ footer {
   -o-transition-property: top, left;
   transition-property: top, left;
 }
+#chart-champion-overlay .chart-champion:hover {
+  z-index: 9999;
+}
 #chart-champion-overlay .chart-champion-icon {
   width: 16px;
   height: 16px;
@@ -168,7 +171,6 @@ footer {
   border-color: #3CF;
 }
 #chart-champion-overlay .chart-champion-icon:hover {
-  z-index: 9999;
   width: 20px;
   height: 20px;
   margin: -2px 0 0 -2px;
