@@ -13,7 +13,34 @@
     <div class="col-lg-12" style="position: relative">
       <div id="chart-button"><button class="btn btn-success" ng-click="summaryChartSwitch()">Displaying: {{ summaryModes[summaryChartShowing] }}</button></div>
       <div id="chart-champion-overlay">
-        <div ng-repeat="(key, value) in champions" ng-attr-id="{{ 'chart-champion-' + value['key'] }}" class="chart-champion" ng-class="value['chartClass']" ng-style="value['chartStyles']"><a ng-href="#champion/{{ value['key'] }}"><img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + value['key'] + '.png' }}"></a></div>
+        <div ng-repeat="(key, value) in champions" class="chart-champion" ng-style="value['chartStyles']" ng-attr-id="{{ 'chart-champion-' + value['key'] }}" ng-mouseenter="charthover = value['key']" ng-mouseleave="charthover = ''">
+          <div class="chart-champion-icon" ng-class="value['chartClass']">
+            <a ng-href="#champion/{{ value['key'] }}"><img ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + value['key'] + '.png' }}"></a>
+          </div>
+          <div class="chart-tooltip" ng-show="charthover == value['key']">
+            <div class="chart-tooltip-name">{{ value['name'] }}</div>
+            <div class="chart-tooltip-stat">Primary Role:
+              <span ng-class="'styletext-' + value.primarynormal">{{ roles[value.primarynormal] }}</span>
+              <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+              <span ng-class="'styletext-' + value.primaryurf">{{ roles[value.primaryurf] }}</span>
+            </div>
+            <div class="chart-tooltip-stat">
+              Pick Rate: {{ value.normalpick | percentage }}
+              <span class="glyphicon" ng-class="value.normalpick < value.urfpick ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+              {{ value.urfpick | percentage }}
+            </div>
+            <div class="chart-tooltip-stat">
+              Win Rate: {{ value.normalwin | percentage }}
+              <span class="glyphicon" ng-class="value.normalwin < value.urfwin ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+              {{ value.urfwin | percentage }}
+            </div>
+            <div class="chart-tooltip-stat">
+              Avg Kills: {{ value.normalkills | twodp }}
+              <span class="glyphicon" ng-class="value.normalkills < value.urfkills ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+              {{ value.urfkills | twodp }}
+            </div>
+          </div>
+        </div>
       </div>
       <div google-chart chart="summaryChart" id="summary-chart" style="height: 500px" on-ready="summaryChartMarkers(chartWrapper)"></div>
     </div>

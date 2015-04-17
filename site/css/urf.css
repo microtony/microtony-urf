@@ -117,12 +117,6 @@ footer {
 }
 #chart-champion-overlay .chart-champion {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 10px;
-  border-width: 1px;
-  border-style: solid;
-  overflow: hidden;
   -webkit-transition: 2s ease-in-out all;
   -moz-transition: 2s ease-in-out all;
   -o-transition: 2s ease-in-out all;
@@ -131,6 +125,32 @@ footer {
   -moz-transition-property: top, left;
   -o-transition-property: top, left;
   transition-property: top, left;
+}
+#chart-champion-overlay .chart-champion-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  overflow: hidden;
+}
+.chart-tooltip {
+  background-color: #111;
+  position: absolute;
+  width: 200px;
+  top: -20px;
+  left: -220px;
+  border-radius: 5px;
+  padding: 3px 0 3px 5px;
+  z-index: 10000;
+  font-size: 13px;
+  border: 1px solid #666;
+}
+.chart-tooltip .chart-tooltip-stat {
+  font-size: 11px;
+}
+.chart-tooltip-stat span.glyphicon {
+  font-size: 9px;
 }
 #chart-champion-overlay .chart-champion-ad {
   border-color: #F44;
@@ -147,19 +167,28 @@ footer {
 #chart-champion-overlay .chart-champion-support {
   border-color: #3CF;
 }
-#chart-champion-overlay .chart-champion img {
-  position: absolute;
-  top: -2px; left: -2px;
-  width: 18px;
-  height: 18px;
-}
-#chart-champion-overlay .chart-champion:hover {
+#chart-champion-overlay .chart-champion-icon:hover {
   z-index: 9999;
   width: 20px;
   height: 20px;
   margin: -2px 0 0 -2px;
   border: 0;
   cursor: pointer;
+}
+#chart-champion-overlay .chart-champion-icon a {
+  display: block;
+  margin: -4px 0 0 -2px;
+}
+#chart-champion-overlay .chart-champion-icon:hover a {
+  margin: -2px 0 0 -2px;
+}
+#chart-champion-overlay .chart-champion-icon img {
+  width: 18px;
+  height: 18px;
+}
+#chart-champion-overlay .chart-champion-icon:hover img {
+  width: 24px;
+  height: 24px;
 }
 #chart-champion-overlay .chart-champion-ad:hover {
   box-shadow: 0 0 3px 3px #F44;
@@ -176,12 +205,7 @@ footer {
 #chart-champion-overlay .chart-champion-support:hover {
   box-shadow: 0 0 3px 3px #3CF;
 }
-#chart-champion-overlay .chart-champion:hover img {
-  z-index: 9999;
-  top: -2px; left: -2px;
-  width: 24px;
-  height: 24px;
-}
+
 #chart-button {
   position: absolute;
   z-index: 1500;

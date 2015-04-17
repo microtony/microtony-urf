@@ -90,7 +90,7 @@ urfControllers.controller('SummaryCtrl', function ($scope, $http, championServic
     normal: 0,
     urf: 0
   };
-
+  $scope.roles = stylenames; 
   $scope.summaryChartShowing = 'urf';
   $scope.summaryModes = {
     'urf' : 'URF', 'normal' : 'Normal'

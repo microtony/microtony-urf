@@ -1,13 +1,15 @@
 URF Play Styles - Riot Games API Challenge entry
 ==============
 
+by Wong Man Hang (NA: microtony, Taiwan: 微Tony)
+
 This project aims to understand how players changed their play style in the URF game mode and the effects. k-means clustering was used to obtain 5 item build centroids (Marksman, Mage, Fighter, Support and Tank). After that, items builds from matches are categorized into one of the 5 centroids. Results are finally aggregated and presented in the mini AngularJS application.
 
 Live URL
 ----
 http://urf.microtony.com
 
-More details of the project are 
+More details of the project can be found in the "About" tab
 
 Technologies used
 ----
