@@ -21,11 +21,21 @@
     <p>Here are the results of the clustering algorithm</p>
     <table class="table" style="background: rgba(0, 0, 0, 0.5)">
       <thead>
-        <tr><th style="width: 10%">Cluster</th><th style="width: 65%">Champions</th><th style="width: 25%">Primary Items</th></tr>
+        <tr><th style="width: 20%">Cluster</th><th style="width: 55%">Champions</th><th style="width: 25%">Primary Items</th></tr>
       </thead>
       <tbody>
         <tr ng-repeat="(key, value) in roles">
-          <td ng-class="'styletext-' + key" style="font-size: 18px">{{ value }}</td>
+          <td><span ng-class="'styletext-' + key" style="font-size: 18px">{{ value }}</span><br>
+            Adoption: {{ overall[key].samples.normal / overall.total.samples.normal | percentage }}
+            <span class="glyphicon" style="font-size: 12px" ng-class="overall[key].samples.normal / overall.total.samples.normal < overall[key].samples.urf / overall.total.samples.urf ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            {{ overall[key].samples.urf / overall.total.samples.urf | percentage }}<br>
+            Win Rate: {{ overall[key].wins.normal / overall[key].samples.normal | percentage }}
+            <span class="glyphicon" style="font-size: 12px" ng-class="overall[key].wins.normal / overall[key].samples.normal < overall[key].wins.urf / overall[key].samples.urf ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            {{ overall[key].wins.urf / overall[key].samples.urf | percentage }}<br>
+            Avg Kills: {{ overall[key].kills.normal / overall[key].samples.normal | twodp }}
+            <span class="glyphicon" style="font-size: 12px" ng-class="overall[key].kills.normal / overall[key].samples.normal < overall[key].kills.urf / overall[key].samples.urf ? ['glyphicon-triangle-top', 'stats-increase'] : ['glyphicon-triangle-bottom', 'stats-decrease']" aria-hidden="true"></span>
+            {{ overall[key].kills.urf / overall[key].samples.urf | twodp }}
+          </td>
           <td class="about-cluster-champion">
             <img ng-repeat="(k1, v1) in clusterChampions[key]" ng-src="{{ 'http://ddragon.leagueoflegends.com/cdn/5.7.1/img/champion/' + v1 + '.png' }}">
           </td>

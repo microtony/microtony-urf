@@ -3,7 +3,38 @@ var readline = require('readline');
  
 var championdata = JSON.parse(fs.readFileSync('champions.json')).data;
 var items = JSON.parse(fs.readFileSync('items_adjusted.json'));
-
+var overall = {
+  total: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  },
+  ad: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  },
+  ap: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  },
+  fighter: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  },
+  tank: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  },
+  support: {
+    samples: {normal: 0, urf: 0},
+    wins: {normal: 0, urf: 0},
+    kills: {normal: 0, urf: 0},
+  }
+}
 for (var c in championdata) {
   championdata[c].stats = {
     total: {
@@ -52,6 +83,12 @@ for (var i = 1; i < data.length; i++) {
   championdata[values[0]].stats['total'].wins.normal += (values[1] == 'True' ? 1 : 0);
   championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].kills.normal += parseInt(values[2]);
   championdata[values[0]].stats['total'].kills.normal += parseInt(values[2]);
+  overall[groupname[parseInt(values[values.length - 1])]].samples.normal++;
+  overall['total'].samples.normal++;
+  overall[groupname[parseInt(values[values.length - 1])]].wins.normal += (values[1] == 'True' ? 1 : 0);
+  overall['total'].wins.normal += (values[1] == 'True' ? 1 : 0);
+  overall[groupname[parseInt(values[values.length - 1])]].kills.normal += parseInt(values[2]);
+  overall['total'].kills.normal += parseInt(values[2]);
   if (i % 1000 == 0) {
     console.log(i + ' / ' + data.length);
   }
@@ -74,6 +111,12 @@ rd.on('line', function(line) {
   championdata[values[0]].stats['total'].wins.urf += (values[1] == 'True' ? 1 : 0);
   championdata[values[0]].stats[groupname[parseInt(values[values.length - 1])]].kills.urf += parseInt(values[2]);
   championdata[values[0]].stats['total'].kills.urf += parseInt(values[2]);
+  overall[groupname[parseInt(values[values.length - 1])]].samples.urf++;
+  overall['total'].samples.urf++;
+  overall[groupname[parseInt(values[values.length - 1])]].wins.urf += (values[1] == 'True' ? 1 : 0);
+  overall['total'].wins.urf += (values[1] == 'True' ? 1 : 0);
+  overall[groupname[parseInt(values[values.length - 1])]].kills.urf += parseInt(values[2]);
+  overall['total'].kills.urf += parseInt(values[2]);
   i++;
   if (i % 1000 == 0) {
     console.log(i);
@@ -118,4 +161,5 @@ var itemstats = function() {
   }
 
   fs.writeFileSync('champion_stats.json', JSON.stringify(championdata));
+  fs.writeFileSync('overall_stats.json', JSON.stringify(overall));
 };

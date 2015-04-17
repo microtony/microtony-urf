@@ -33,6 +33,92 @@ urfControllers.controller('AboutCtrl', function($scope, championService) {
       'support' : 'Thresh Alistar Soraka Sona Janna Taric Blitzcrank Leona Nautilus Braum Nami Bard'.split(/ /),
       'tank' : 'Shen Olaf XinZhao Sion Warwick Nunu Jax Evelynn Amumu Rammus DrMundo Irelia Trundle Malphite Maokai Elise Skarner Nasus Udyr Poppy Gragas Yorick Garen Shyvana Volibear Sejuani Hecarim Gnar Zac Vi'.split(/ /)
     };
+    $scope.overall = {
+      "total": {
+        "samples": {
+          "normal": 801086,
+          "urf": 919862
+        },
+        "wins": {
+          "normal": 400922,
+          "urf": 460265
+        },
+        "kills": {
+          "normal": 4911436,
+          "urf": 9445950
+        }
+      },
+      "ad": {
+        "samples": {
+          "normal": 187188,
+          "urf": 179818
+        },
+        "wins": {
+          "normal": 94514,
+          "urf": 90902
+        },
+        "kills": {
+          "normal": 1495817,
+          "urf": 1872482
+        }
+      },
+      "ap": {
+        "samples": {
+          "normal": 210732,
+          "urf": 537036
+        },
+        "wins": {
+          "normal": 106558,
+          "urf": 268642
+        },
+        "kills": {
+          "normal": 1427046,
+          "urf": 5646776
+        }
+      },
+      "fighter": {
+        "samples": {
+          "normal": 106658,
+          "urf": 96070
+        },
+        "wins": {
+          "normal": 51882,
+          "urf": 48815
+        },
+        "kills": {
+          "normal": 766176,
+          "urf": 1028732
+        }
+      },
+      "tank": {
+        "samples": {
+          "normal": 176405,
+          "urf": 100360
+        },
+        "wins": {
+          "normal": 89053,
+          "urf": 49096
+        },
+        "kills": {
+          "normal": 988024,
+          "urf": 869147
+        }
+      },
+      "support": {
+        "samples": {
+          "normal": 120103,
+          "urf": 6578
+        },
+        "wins": {
+          "normal": 58915,
+          "urf": 2810
+        },
+        "kills": {
+          "normal": 234373,
+          "urf": 28813
+        }
+      }
+    };
     $scope.clusterItems = {
       'ad' : [3006, 3031, 3072, 3087, 3153],
       'ap' : [3157, 3135, 3089, 3027, 3020],
